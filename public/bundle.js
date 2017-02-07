@@ -10158,11 +10158,23 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
       this.setState({
         text: response.data.text
       }, function () {
-        console.log(this.state);
+        // console.log(this.state);
       });
     }).catch(err => {
       console.log(err);
     }); // get request from API
+  }
+
+  changeParas(number) {
+    this.setState({
+      paras: number
+    }, this.getText);
+  }
+
+  showHtml(x) {
+    this.setState({
+      html: x
+    }, this.getText); // re-request the information when calling 'this.getText'
   }
 
   render() {
@@ -10191,7 +10203,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
             null,
             'Paragraphs: '
           ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Controls_Text__["a" /* default */], { value: this.state.paras })
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Controls_Text__["a" /* default */], { value: this.state.paras, onChange: this.changeParas.bind(this) })
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
@@ -10201,7 +10213,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
             null,
             'Include HTML: '
           ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Controls_Select__["a" /* default */], { value: this.state.html })
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Controls_Select__["a" /* default */], { value: this.state.html, onChange: this.showHtml.bind(this) })
         )
       )
     );
@@ -23351,17 +23363,30 @@ class Select extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
     };
   }
 
+  onChange(e) {
+    this.setState({
+      value: e.target.value
+    }, function () {
+      this.props.onChange(this.state.value);
+    });
+  }
+
   render() {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       "div",
       null,
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         "select",
-        null,
+        { onChange: this.onChange.bind(this) },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           "option",
-          { value: "0" },
-          "Select"
+          { value: "true" },
+          "Yes"
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          "option",
+          { value: "false" },
+          "No"
         )
       )
     );
@@ -23387,11 +23412,19 @@ class Text extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
     };
   }
 
+  onChange(e) {
+    this.setState({
+      value: e.target.value //whatever is typed in
+    }, function () {
+      this.props.onChange(this.state.value);
+    });
+  }
+
   render() {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       "div",
       null,
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text" })
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "number", value: this.state.value, onChange: this.onChange.bind(this) })
     );
   }
 }

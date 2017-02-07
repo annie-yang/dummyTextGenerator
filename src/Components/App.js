@@ -31,11 +31,23 @@ class App extends Component{
         this.setState({
           text:response.data.text
         },function(){
-          console.log(this.state);
+          // console.log(this.state);
         });
       }).catch((err) => {
         console.log(err);
       }); // get request from API
+  }
+
+  changeParas(number){
+    this.setState({
+      paras: number
+    }, this.getText);
+  }
+
+  showHtml(x){
+    this.setState({
+      html: x
+    }, this.getText); // re-request the information when calling 'this.getText'
   }
 
   render(){
@@ -47,11 +59,11 @@ class App extends Component{
         <form>
           <div>
             <label>Paragraphs: </label>
-            <Text value={this.state.paras}/>
+            <Text value={this.state.paras} onChange={this.changeParas.bind(this)}/>
           </div>
           <div>
             <label>Include HTML: </label>
-            <Select value={this.state.html}/>
+            <Select value={this.state.html} onChange={this.showHtml.bind(this)}/>
           </div>
         </form>
       </div>
