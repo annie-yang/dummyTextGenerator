@@ -3,7 +3,7 @@ module.exports = {
   output: {
     path: __dirname,
     filename: './public/bundle.js'
-  }, // compiled file
+  },
   module:{
     loaders:[{
       test: /\.jsx?$/,

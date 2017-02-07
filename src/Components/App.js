@@ -4,6 +4,8 @@ import axios from 'axios'; // client to make requests with
 
 // Components
 import Output from './Output';
+import Text from './Controls/Text';
+import Select from './Controls/Select';
 
 class App extends Component{
   constructor(props){
@@ -38,9 +40,20 @@ class App extends Component{
 
   render(){
     return (
-      <div>
+      <div className="container">
         <h1>Dummy Text Generator</h1>
         <Output value={this.state.text}/>
+        <h3>Real Time Options</h3>
+        <form>
+          <div>
+            <label>Paragraphs: </label>
+            <Text value={this.state.paras}/>
+          </div>
+          <div>
+            <label>Include HTML: </label>
+            <Select value={this.state.html}/>
+          </div>
+        </form>
       </div>
     );
   }
